@@ -48,6 +48,17 @@ function Mode (stat) {
   this.others = new Others(stat);
 }
 
+/**
+ * Returns the Number value of the `mode`.
+ *
+ * @return {Number}
+ * @api public
+ */
+
+Mode.prototype.valueOf = function () {
+  return this.stat.mode;
+};
+
 Mode.prototype._checkModeProperty = function (property, set) {
   if (set) {
     this.stat.mode = (this.stat.mode | S_IFMT) & property;
