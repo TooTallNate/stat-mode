@@ -74,6 +74,8 @@ Mode.prototype.toString = function () {
     str.push('d');
   } else if (this.isFile()) {
     str.push('-');
+  } else if (this.isSymbolicLink()) {
+    str.push('l');
   } else {
     // TODO: handle all file types…
     str.push('?');
