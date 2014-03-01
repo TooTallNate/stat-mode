@@ -59,6 +59,44 @@ Mode.prototype.valueOf = function () {
   return this.stat.mode;
 };
 
+/**
+ * Returns a String representation of the `mode`.
+ *
+ * @return {String}
+ * @api public
+ */
+
+Mode.prototype.toString = function () {
+  var str = [];
+
+  // file type
+  if (this.isDirectory()) {
+    str.push('d');
+  } else if (this.isFile()) {
+    str.push('-');
+  } else {
+    // TODO: handle all file types…
+    str.push('?');
+  }
+
+  // owner read, write, execute
+  str.push(this.owner.read ? 'r' : '-');
+  str.push(this.owner.write ? 'w' : '-');
+  str.push(this.owner.execute ? 'x' : '-');
+
+  // group read, write, execute
+  str.push(this.group.read ? 'r' : '-');
+  str.push(this.group.write ? 'w' : '-');
+  str.push(this.group.execute ? 'x' : '-');
+
+  // others read, write, execute
+  str.push(this.others.read ? 'r' : '-');
+  str.push(this.others.write ? 'w' : '-');
+  str.push(this.others.execute ? 'x' : '-');
+
+  return str.join('');
+};
+
 Mode.prototype._checkModeProperty = function (property, set) {
   if (set) {
     this.stat.mode = (this.stat.mode | S_IFMT) & property;
