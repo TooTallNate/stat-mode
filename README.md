@@ -53,6 +53,7 @@ fs.stat('/bin/echo', function (err, stat) {
   mode.isFile();
   // true
 
+
   // and you can also check individual owner, group and others permissions
   mode.owner.read;
   // true
@@ -80,6 +81,11 @@ fs.stat('/bin/echo', function (err, stat) {
 
   mode.others.execute;
   // true
+
+
+  // the `toString()` output resembes the `ls -l` output:
+  mode.toString();
+  // '-rwxr-xr-x'
 });
 ```
 
