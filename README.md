@@ -30,11 +30,57 @@ $ ls -l /bin/echo
 -rwxr-xr-x 1 root wheel 14128 Aug 11  2013 /bin/echo
 ```
 
+We can inspect it using the `fs.stat()` call and creating a `Mode` instance
+on top of it.
+
 ``` javascript
 var fs = require('fs');
 var Mode = require('stat-mode');
 
+fs.stat('/bin/echo', function (err, stat) {
+  if (err) throw err;
 
+  // create a "Mode" instance on top of the `stat` object
+  var mode = new Mode(stat);
+
+  // you can check what kind of file it is:
+  mode.isDirectory();
+  // false
+
+  mode.isFIFO();
+  // false
+
+  mode.isFile();
+  // true
+
+  // and you can also check individual owner, group and others permissions
+  mode.owner.read;
+  // true
+
+  mode.owner.write;
+  // true
+
+  mode.owner.execute;
+  // true
+
+  mode.group.read;
+  // true
+
+  mode.group.write;
+  // false
+
+  mode.group.execute;
+  // true
+
+  mode.others.read;
+  // true
+
+  mode.others.write;
+  // false
+
+  mode.others.execute;
+  // true
+});
 ```
 
 
