@@ -74,11 +74,18 @@ Mode.prototype.toString = function () {
     str.push('d');
   } else if (this.isFile()) {
     str.push('-');
+  } else if (this.isBlockDevice()) {
+    str.push('b');
+  } else if (this.isCharacterDevice()) {
+    str.push('c');
   } else if (this.isSymbolicLink()) {
     str.push('l');
+  } else if (this.isFIFO()) {
+    str.push('p');
+  } else if (this.isSocket()) {
+    str.push('s');
   } else {
-    // TODO: handle all file types…
-    str.push('?');
+    throw new TypeError('unexpected "file type"');
   }
 
   // owner read, write, execute
