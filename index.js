@@ -61,6 +61,9 @@ Mode.prototype.valueOf = function () {
 
 /**
  * Returns a String representation of the `mode`.
+ * The output resembles something similiar to what `ls -l` would output.
+ *
+ * http://en.wikipedia.org/wiki/Unix_file_types
  *
  * @return {String}
  * @api public
