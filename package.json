@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "description": "Offers convenient getters and setters for the stat `mode`",
   "main": "index.js",
-  "scripts": {
-    "test": "mocha --reporter spec"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/TooTallNate/stat-mode.git"
