@@ -19,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/TooTallNate/stat-mode/issues"
   },
-  "homepage": "https://github.com/TooTallNate/stat-mode"
+  "homepage": "https://github.com/TooTallNate/stat-mode",
+  "devDependencies": {
+    "mocha": "^1.17.1"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec"
+  }
 }
