@@ -4,7 +4,16 @@ stat-mode
 
 You know that `mode` property on the `fs.Stat` object that you probably
 usually just ignore? Well there's acutally a lot of information packed
-into that number. This module helps you extract that information.
+into that number.
+
+The specific information includes:
+
+ * What the ["file type"](http://en.wikipedia.org/wiki/Unix_file_types) of file it is
+ * Whether or not the [`setuid` and `setgid` bits](http://en.wikipedia.org/wiki/Setuid) are set
+ * Whether or not the [`sticky` bit](http://en.wikipedia.org/wiki/Sticky_bit) is set
+ * The _read_, _write_, and _execute_ permissions for the _owner_, _group_ and _others_.
+
+This module helps you extract that information.
 
 All the getters are also setters, which change the `mode` property
 appropriately. This is useful for when you have to build up your
