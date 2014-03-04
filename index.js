@@ -94,17 +94,29 @@ Mode.prototype.toString = function () {
   // owner read, write, execute
   str.push(this.owner.read ? 'r' : '-');
   str.push(this.owner.write ? 'w' : '-');
-  str.push(this.owner.execute ? 'x' : '-');
+  if (this.setuid) {
+    str.push(this.owner.execute ? 's' : 'S');
+  } else {
+    str.push(this.owner.execute ? 'x' : '-');
+  }
 
   // group read, write, execute
   str.push(this.group.read ? 'r' : '-');
   str.push(this.group.write ? 'w' : '-');
-  str.push(this.group.execute ? 'x' : '-');
+  if (this.setgid) {
+    str.push(this.group.execute ? 's' : 'S');
+  } else {
+    str.push(this.group.execute ? 'x' : '-');
+  }
 
   // others read, write, execute
   str.push(this.others.read ? 'r' : '-');
   str.push(this.others.write ? 'w' : '-');
-  str.push(this.others.execute ? 'x' : '-');
+  if (this.sticky) {
+    str.push(this.others.execute ? 't' : 'T');
+  } else {
+    str.push(this.others.execute ? 'x' : '-');
+  }
 
   return str.join('');
 };
@@ -143,6 +155,45 @@ Mode.prototype.isFIFO = function (v) {
 Mode.prototype.isSocket = function (v) {
   return this._checkModeProperty(S_IFSOCK, v);
 };
+
+define(Mode.prototype, 'setuid',
+  function () {
+    return Boolean(this.stat.mode & S_ISUID);
+  },
+  function (v) {
+    if (v) {
+      this.stat.mode |= S_ISUID;
+    } else {
+      this.stat.mode &= ~S_ISUID;
+    }
+  }
+);
+
+define(Mode.prototype, 'setgid',
+  function () {
+    return Boolean(this.stat.mode & S_ISGID);
+  },
+  function (v) {
+    if (v) {
+      this.stat.mode |= S_ISGID;
+    } else {
+      this.stat.mode &= ~S_ISGID;
+    }
+  }
+);
+
+define(Mode.prototype, 'sticky',
+  function () {
+    return Boolean(this.stat.mode & S_ISVTX);
+  },
+  function (v) {
+    if (v) {
+      this.stat.mode |= S_ISVTX;
+    } else {
+      this.stat.mode &= ~S_ISVTX;
+    }
+  }
+);
 
 function Owner (stat) {
   define(this, 'read',
