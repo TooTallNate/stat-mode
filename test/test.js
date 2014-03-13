@@ -9,4 +9,27 @@ describe('stat-mode', function () {
     assert.equal('Mode', Mode.name);
   });
 
+  describe('Mode', function () {
+
+    it('should return a `Mode` instance with `new`', function () {
+      var m = new Mode({});
+      assert(m instanceof Mode);
+    });
+
+    it('should return a `Mode` instance without `new`', function () {
+      var m = Mode({});
+      assert(m instanceof Mode);
+    });
+
+    it('should throw an Error if no `stat` object is passed in', function () {
+      try {
+        new Mode();
+        assert(false, 'unreachable');
+      } catch (e) {
+        assert.equal('must pass in a "stat" object', e.message);
+      }
+    });
+
+  });
+
 });
