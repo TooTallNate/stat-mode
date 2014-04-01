@@ -121,6 +121,19 @@ Mode.prototype.toString = function () {
   return str.join('');
 };
 
+/**
+ * Returns an octal representation of the `mode`, eg. "0754".
+ *
+ * http://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation
+ *
+ * @return {String}
+ * @api public
+ */
+
+Mode.prototype.toOctal = function () {
+  return '0' + (this.stat.mode & 0777).toString(8);
+};
+
 Mode.prototype._checkModeProperty = function (property, set) {
   if (set) {
     this.stat.mode = (this.stat.mode | S_IFMT) & property;
