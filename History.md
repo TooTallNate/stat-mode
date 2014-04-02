@@ -2,7 +2,7 @@
 0.2.0 / 2014-04-02
 ==================
 
-  * index: add `#toOctal()`
+  * index: add `Mode#toOctal()` function
   * index: add `setuid`, `setgid` and `sticky` props
   * test: initial tests
 
