@@ -30,6 +30,20 @@ describe('stat-mode', function () {
       }
     });
 
+    describe('#toString', function () {
+      it('should convert a mode to a unix string', function () {
+        var m = new Mode({ mode: 33188 });
+        assert.equal(m.toString(), '-rw-r--r--');
+      });
+    });
+
+    describe('#toOctal', function () {
+      it('should convert a mode to an octal string', function () {
+        var m = new Mode({ mode: 33188 });
+        assert.equal(m.toOctal(), '0644');
+      });
+    });
+
   });
 
 });
