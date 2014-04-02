@@ -131,7 +131,8 @@ Mode.prototype.toString = function () {
  */
 
 Mode.prototype.toOctal = function () {
-  return '0' + (this.stat.mode & 0777).toString(8);
+  var octal = this.stat.mode & 4095 /* 07777 */;
+  return ('0000' + octal.toString(8)).slice(-4);
 };
 
 Mode.prototype._checkModeProperty = function (property, set) {
