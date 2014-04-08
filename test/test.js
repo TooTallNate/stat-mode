@@ -42,6 +42,30 @@ describe('stat-mode', function () {
         octal: '0755',
         string: 'drwxr-xr-x',
         type: 'directory'
+      },
+      {
+        mode: 16832 /* 040700 */,
+        octal: '0700',
+        string: 'drwx------',
+        type: 'directory'
+      },
+      {
+        mode: 41325 /* 0120555 */,
+        octal: '0555',
+        string: 'lr-xr-xr-x',
+        type: 'symbolicLink'
+      },
+      {
+        mode: 8592 /* 020620 */,
+        octal: '0620',
+        string: 'crw--w----',
+        type: 'characterDevice'
+      },
+      {
+        mode: 24960 /* 060600 */,
+        octal: '0600',
+        string: 'brw-------',
+        type: 'blockDevice'
       }
     ].forEach(function (test) {
       var m = new Mode(test);
