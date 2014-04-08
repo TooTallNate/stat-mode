@@ -30,17 +30,38 @@ describe('stat-mode', function () {
       }
     });
 
-    describe('#toString', function () {
-      it('should convert a mode to a unix string', function () {
-        var m = new Mode({ mode: 33188 });
-        assert.equal(m.toString(), '-rw-r--r--');
-      });
-    });
-
-    describe('#toOctal', function () {
-      it('should convert a mode to an octal string', function () {
-        var m = new Mode({ mode: 33188 });
-        assert.equal(m.toOctal(), '0644');
+    [
+      {
+        mode: 33188 /* 0100644 */,
+        octal: '0644',
+        string: '-rw-r--r--',
+        type: 'file'
+      },
+      {
+        mode: 16877 /* 040755 */,
+        octal: '0755',
+        string: 'drwxr-xr-x',
+        type: 'directory'
+      }
+    ].forEach(function (test) {
+      var m = new Mode(test);
+      var isFn = 'is' + test.type[0].toUpperCase() + test.type.substring(1);
+      describe('input: 0' + test.mode.toString(8), function () {
+        describe('#toString()', function () {
+          it('should equal "' + test.string + '"', function () {
+            assert.equal(m.toString(), test.string);
+          });
+        });
+        describe('#toOctal()', function () {
+          it('should equal "' + test.octal + '"', function () {
+            assert.equal(m.toOctal(), test.octal);
+          });
+        });
+        describe('#' + isFn + '()', function () {
+          it('should be `true`', function () {
+            assert.ok(m[isFn]());
+          });
+        });
       });
     });
 
