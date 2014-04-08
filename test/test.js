@@ -66,6 +66,12 @@ describe('stat-mode', function () {
         octal: '0600',
         string: 'brw-------',
         type: 'blockDevice'
+      },
+      {
+        mode: 4516 /* 010644 */,
+        octal: '0644',
+        string: 'prw-r--r--',
+        type: 'FIFO'
       }
     ].forEach(function (test) {
       var m = new Mode(test);
