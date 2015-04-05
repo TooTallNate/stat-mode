@@ -136,10 +136,11 @@ Mode.prototype.toOctal = function () {
 };
 
 Mode.prototype._checkModeProperty = function (property, set) {
+  var mode = this.stat.mode;
   if (set) {
-    this.stat.mode = (this.stat.mode | S_IFMT) & property;
+    this.stat.mode = (mode | S_IFMT) & property | mode & ~S_IFMT;
   }
-  return (this.stat.mode & S_IFMT) === property;
+  return (mode & S_IFMT) === property;
 };
 
 Mode.prototype.isDirectory = function (v) {
