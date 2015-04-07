@@ -73,9 +73,10 @@ describe('stat-mode', function () {
         string: 'prw-r--r--',
         type: 'FIFO'
       }
-    ].map(function (test) {
+    ].forEach(function (test) {
       var m = new Mode(test);
       var isFn = 'is' + test.type[0].toUpperCase() + test.type.substring(1);
+      var strMode = m.toString();
       describe('input: 0' + test.mode.toString(8), function () {
         describe('#toString()', function () {
           it('should equal "' + test.string + '"', function () {
@@ -91,17 +92,19 @@ describe('stat-mode', function () {
           it('should be `true`', function () {
             assert.ok(m[isFn]());
           });
-        });
-      });
 
-      return test;
-    }).map(function (test) {
-      var m = new Mode(test);
-      var isFn = 'is' + test.type[0].toUpperCase() + test.type.substring(1);
-      var strMode = m.toString();
-      it('should be ' + strMode, function () {
-        m[isFn](true)
-        assert.equal(strMode, m.toString());
+          it('should remain "' + strMode + '" after resetting file type (gh-2)', function () {
+            assert.equal(true, m[isFn](true));
+            assert.equal(strMode, m.toString());
+          });
+
+          var opposite = test.type == 'file' ? 'isDirectory' : 'isFile';
+          var first = test.type == 'file' ? 'd' : '-';
+          it('should be `false` after `#' + opposite + '(true)`', function () {
+            assert.equal(false, m[opposite](true));
+            assert.equal(first + m.toString().substring(1), m.toString());
+          });
+        });
       });
     });
 
