@@ -1,4 +1,19 @@
 
+0.2.1 / 2015-04-06
+==================
+
+  * fix #2
+  * add regression test for #2
+  * travis: test node v0.12 instead of v0.11
+  * .travis: don't test node v0.9.x
+  * add .travis.yml file
+  * README: add Travis-CI badge
+  * test: add FIFO test
+  * test: more test cases
+  * test: more inputs for tests
+  * package: update "mocha" to v1.18.2
+  * package: add a few more "keywords"
+
 0.2.0 / 2014-04-02
 ==================
 
