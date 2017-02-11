@@ -73,7 +73,7 @@ describe('stat-mode', function () {
         string: 'prw-r--r--',
         type: 'FIFO'
       }
-    ].forEach(function (test) {
+    ].map(function (test) {
       var m = new Mode(test);
       var isFn = 'is' + test.type[0].toUpperCase() + test.type.substring(1);
       var strMode = m.toString();
@@ -107,6 +107,16 @@ describe('stat-mode', function () {
             assert.equal(first + m.toString().substring(1), m.toString());
           });
         });
+      });
+
+      return test;
+    }).map(function (test) {
+      var m = new Mode(test);
+      var isFn = 'is' + test.type[0].toUpperCase() + test.type.substring(1);
+      var strMode = m.toString();
+      it('should be ' + strMode, function () {
+        m[isFn](true)
+        assert.equal(strMode, m.toString());
       });
     });
 
