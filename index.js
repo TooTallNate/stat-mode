@@ -88,7 +88,10 @@ Mode.prototype.toString = function () {
   } else if (this.isSocket()) {
     str.push('s');
   } else {
-    throw new TypeError('unexpected "file type"');
+    const mode = this.valueOf();
+    const err = new TypeError('Unexpected "file type": mode=' + mode);
+    err.stat = this.stat;
+    err.mode = mode;
   }
 
   // owner read, write, execute
