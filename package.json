@@ -1,6 +1,6 @@
 {
   "name": "stat-mode",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Offers convenient getters and setters for the stat `mode`",
   "main": "index.js",
   "repository": {
