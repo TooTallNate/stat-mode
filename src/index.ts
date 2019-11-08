@@ -161,7 +161,7 @@ namespace createMode {
 		 * @return {String}
 		 * @api public
 		 */
-		public toOctal() {
+		public toOctal(): string {
 			const octal = this.stat.mode & 4095 /* 07777 */;
 			return `0000${octal.toString(8)}`.slice(-4);
 		}
@@ -175,7 +175,7 @@ namespace createMode {
 		 * @return {String}
 		 * @api public
 		 */
-		public toString() {
+		public toString(): string {
 			const str = [];
 
 			// file type
@@ -231,14 +231,14 @@ namespace createMode {
 			return str.join('');
 		}
 
-		public valueOf() {
+		public valueOf(): number {
 			return this.stat.mode;
 		}
 
-		get setuid() {
+		get setuid(): boolean {
 			return Boolean(this.stat.mode & S_ISUID);
 		}
-		set setuid(v: any) {
+		set setuid(v: boolean) {
 			if (v) {
 				this.stat.mode |= S_ISUID;
 			} else {
@@ -246,10 +246,10 @@ namespace createMode {
 			}
 		}
 
-		get setgid() {
+		get setgid(): boolean {
 			return Boolean(this.stat.mode & S_ISGID);
 		}
-		set setgid(v: any) {
+		set setgid(v: boolean) {
 			if (v) {
 				this.stat.mode |= S_ISGID;
 			} else {
@@ -257,10 +257,10 @@ namespace createMode {
 			}
 		}
 
-		get sticky() {
+		get sticky(): boolean {
 			return Boolean(this.stat.mode & S_ISVTX);
 		}
-		set sticky(v: any) {
+		set sticky(v: boolean) {
 			if (v) {
 				this.stat.mode |= S_ISVTX;
 			} else {
